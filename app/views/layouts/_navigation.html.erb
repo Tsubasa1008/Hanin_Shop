@@ -1,0 +1,54 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul class="nav metismenu" id="side-menu">
+      <li class="nav-header">
+        <div class="dropdown profile-element">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="clear">
+              <span class="block m-t-xs">
+                <strong class="font-bold">
+                  <% if current_manager %>
+                    <%= current_manager.name == "" ? current_manager.email : current_manager.name %>
+                  <% else %>
+                    Example
+                  <% end %> 
+                </strong>
+              </span> <span class="text-muted text-xs block"> Admin <b class="caret"></b></span>
+            </span>
+          </a>
+          <ul class="dropdown-menu animated fadeInRight m-t-xs">
+            <li><%= link_to "個人資料", edit_dashboard_admin_manager_path(current_manager) %></li>
+            <li class="divider"></li>
+            <li><%= link_to "登出", destroy_manager_session_path, method: 'delete' %></li>
+          </ul>
+        </div>
+        <div class="logo-element">
+          IN+
+        </div>
+      </li>
+      <li class="<%= is_active_controller('dashboard/admin/admin') %>">
+        <%= link_to dashboard_admin_path do %>
+        <i class="fa fa-laptop"></i> <span class="nav-label">總覽</span>
+        <% end %>
+      </li>
+      <li class="<%= is_active_controller('dashboard/admin/users') %>">
+        <%= link_to dashboard_admin_users_path do %>
+          <i class="fa fa-desktop"></i> 
+          <span class="nav-label">會員管理</span>
+        <% end %>
+      </li>
+      <li class="<%= 'active' if current_page?('/home/minor') %>">
+        <%= link_to "#" do %>
+          <i class="fa fa-edit"></i> 
+          <span class="nav-label" data-i18n="nav.forms">Forms</span>
+          <span class="fa arrow"></span>
+        <% end %>
+        <ul class="nav nav-second-level collapse in">
+          <li>
+            <a href="#">Test</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
