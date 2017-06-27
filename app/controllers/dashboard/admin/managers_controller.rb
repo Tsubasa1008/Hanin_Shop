@@ -15,10 +15,10 @@ class Dashboard::Admin::ManagersController < Dashboard::Admin::AdminController
   end
 
   def check_manager_email
-    if Manager.find(params[:email])
-      render "false"
+    if Manager.where(email: params[:email])
+      render json: { reslut: "false" }
     else
-      render "true"
+      render json: { result: "true" }
     end
   end
 
