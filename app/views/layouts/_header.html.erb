@@ -1,0 +1,25 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2><%= header.last %></h2>
+    <ol class="breadcrumb">
+      <li>
+        <%= link_to "首頁", dashboard_admin_path %>
+      </li>
+      <% if header[1] %>
+        <li class="breadcrumb">
+          <%= link_to header.first , path %>
+        </li>
+        <li class="active">
+          <strong><%= header.last %></strong>
+        </li>
+      <% else %>
+        <li class="active">
+          <strong><%= header.last %></strong>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+
+  <div class="col-lg-2">
+  </div>
+</div>

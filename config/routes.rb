@@ -15,6 +15,7 @@ Rails.application.routes.draw do
             get :check_manager_email
           end
         end
+        resources :products
         get  "/", to: "admin#index"
       end
     end

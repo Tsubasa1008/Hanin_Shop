@@ -30,24 +30,28 @@
       </li>
       <li class="<%= is_active_controller('dashboard/admin/admin') %>">
         <%= link_to dashboard_admin_path do %>
-        <i class="fa fa-laptop"></i> <span class="nav-label">總覽</span>
+          <i class="fa fa-laptop"></i>
+          <span class="nav-label"> 總覽</span>
         <% end %>
       </li>
       <li class="<%= is_active_controller('dashboard/admin/users') %>">
         <%= link_to dashboard_admin_users_path do %>
-          <i class="fa fa-desktop"></i> 
-          <span class="nav-label">會員管理</span>
+          <i class="fa fa-desktop"></i>
+          <span class="nav-label"> 會員管理</span>
         <% end %>
       </li>
-      <li class="<%= 'active' if current_page?('/home/minor') %>">
-        <%= link_to "#" do %>
-          <i class="fa fa-edit"></i> 
-          <span class="nav-label" data-i18n="nav.forms">Forms</span>
+      <li class="<%= is_active_controller('dashboard/admin/products') %>">
+        <a href="#">
+          <i class="fa fa-edit"></i>
+          <span class="nav-label" data-i18n="nav.forms"> 商品管理</span>
           <span class="fa arrow"></span>
-        <% end %>
-        <ul class="nav nav-second-level collapse in">
-          <li>
-            <a href="#">Test</a>
+        </a>
+        <ul class="nav nav-second-level collapse <%= is_active_controller('dashboard/admin/products', 'in') %>">
+          <li class="<%= is_active_action('index') %>">
+            <%= link_to "商品清單", dashboard_admin_products_path %>
+          </li>
+          <li class="<%= is_active_action('new') %>">
+            <%= link_to "商品新增", new_dashboard_admin_product_path %>
           </li>
         </ul>
       </li>

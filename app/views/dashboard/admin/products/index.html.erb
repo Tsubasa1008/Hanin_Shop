@@ -1,0 +1,96 @@
+<%= render "layouts/header", header: ["商品清單"], path: nil %>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>商品清單</h5>
+        </div>
+        <div class="ibox-content">
+          <table class="table table-striped table-bordered table-hover dataTables-products">
+            <thead>
+              <tr>
+                <th>圖片</th>
+                <th>名稱</th>
+                <th>描述</th>
+                <th>價格</th>
+                <th>庫存</th>
+                <th>管理</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @products.each do |product| %>
+                <tr>
+                  <td>
+                    <%= product.id %>
+                  </td>
+                  <td>
+                    <%= product.name %>
+                  </td>
+                  <td>
+                    <%= truncate(product.description) %>
+                  </td>
+                  <td>
+                    <%= product.price %>
+                  </td>
+                  <td>
+                    <%= product.qty %>
+                  </td>
+                  <td>
+                    <%= link_to "編輯", "#", class: "btn-white btn btn-xs" %>
+                  </td>
+                </tr>
+                <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>圖片</th>
+                <th>名稱</th>
+                <th>描述</th>
+                <th>價格</th>
+                <th>庫存</th>
+                <th>管理</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function () {
+      $('.dataTables-products').DataTable({
+        oLanguage: {
+          sUrl: "http://localhost:3000/locales/dataTables.zh-TW.yml"
+        },
+        pageLength: 25,
+        responsive: true,
+        dom: '<"html5buttons"B>lTfgitp',
+        buttons: [
+          { extend: 'copy' },
+          { extend: 'csv', title: "商品清單" },
+          { extend: 'excel', title: "會員清單" },
+          { extend: 'pdf', title: "商品清單" },
+          {
+            extend: 'print', title: "商品清單",
+            customize: function (win) {
+              $(win.document.body).addClass('white-bg');
+              $(win.document.body).css('font-size', '10px');
+              $(win.document.body).find('table').addClass('compact').css('font-size', 'inherit');
+            }
+          }
+        ],
+        columnDefs: [
+          {
+            orderable: false,
+            targets: -1
+          }
+        ]
+      });
+    });
+  </script>
+<% end %>
